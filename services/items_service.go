@@ -3,7 +3,7 @@ package services
 import (
 	"github.com/alvaro259818/bookstore-utils-go/rest_errors"
 	"github.com/alvaro259818/bookstore_items-api/domain/items"
-	"net/http"
+	"github.com/alvaro259818/bookstore_items-api/domain/queries"
 )
 
 var (
@@ -13,6 +13,7 @@ var (
 type itemServiceInterface interface {
 	Create(items.Item) (*items.Item, rest_errors.RestError)
 	Get(string) (*items.Item, rest_errors.RestError)
+	Search(queries.EsQuery) ([]items.Item, rest_errors.RestError)
 }
 
 type itemService struct {
@@ -25,7 +26,15 @@ func (s *itemService) Create(item items.Item) (*items.Item, rest_errors.RestErro
 	return &item, nil
 }
 
-func (s *itemService) Get(itemId string) (*items.Item, rest_errors.RestError) {
-	return nil, rest_errors.NewRestError("implement me", http.StatusNotImplemented,
-		"not_implemented", nil)
+func (s *itemService) Get(id string) (*items.Item, rest_errors.RestError) {
+	item := items.Item{Id: id}
+	if err := item.Get(); err != nil {
+		return  nil, err
+	}
+	return &item, nil
+}
+
+func (s *itemService) Search(query queries.EsQuery) ([]items.Item, rest_errors.RestError)  {
+	dao := items.Item{}
+	return dao.Search(query)
 }

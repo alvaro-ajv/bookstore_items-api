@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/alvaro259818/bookstore-oauth-go v1.0.0 // indirect
-	github.com/alvaro259818/bookstore-utils-go v1.0.0 // indirect
+	github.com/alvaro259818/bookstore-utils-go v1.0.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/olivere/elastic v6.2.35+incompatible // indirect
